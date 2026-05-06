@@ -393,3 +393,37 @@ defExports.rebasicShooterFatMan = {
 };
 defExports.fatManNukeLauncher.UPGRADES_TIER_4 = [defExports.refatManNukeLauncher];
 defExports.basicShooterFatMan.UPGRADES_TIER_4 = [defExports.rebasicShooterFatMan];
+
+defExports.snlAuto3 = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Soviet Nuke Launcher-3',
+	TOOLTIP: `''hey you stole this from adi-'' shut up`,
+    DANGER: 6,
+    FACING_TYPE: 'autospin',
+    TURRETS: [{
+        POSITION: [11, 8, 0, 0, 190, 0],
+        TYPE: defExports.retsarBombaLauncherAutoGun
+    }, {
+        POSITION: [11, 8, 0, 120, 190, 0],
+        TYPE: defExports.retsarBombaLauncherAutoGun
+    }, {
+        POSITION: [11, 8, 0, 240, 190, 0],
+        TYPE: defExports.retsarBombaLauncherAutoGun
+    }]
+};
+defExports.snlAuto10 = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Soviet Nuke Launcher-10',
+	TOOLTIP: `''bro you stole this from adiss aswell get some original idea-'' i said shUT THE *bep* UP`,
+    FACING_TYPE: 'autospin',
+    DANGER: 7,
+    TURRETS: []
+};
+for (let i = 0; i < 10; i++) {
+    defExports.snlAuto10.TURRETS = defExports.snlAuto10.TURRETS.concat({
+        POSITION: [6, 9, 0, i * 36, 180, 0],
+        TYPE: defExports.retsarBombaLauncherAutoGun
+    });
+}
+defExports.retsarBombaLauncher.UPGRADES_TIER_4 = [defExports.snlAuto3];
+defExports.snlAuto3.UPGRADES_TIER_4 = [defExports.snlAuto10];
