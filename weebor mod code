@@ -58,7 +58,6 @@ defExports.basic.UPGRADES_TIER_4 = [defExports.diep0, defExports.featured_tanks]
 defExports.arenaCloserParentLite = {
     PARENT: [defExports.genericTank],
     LABEL: 'Arena Closer Lite',
-	TOOLTIP: `You have arena closer properties, but the power of a basic. (also this tank might suffer reworks as you play because i suck at coding)`,
     DANGER: 10,
     SIZE: 12,
     COLOR: 13,
@@ -79,6 +78,7 @@ defExports.arenaCloserParentLite = {
 };
 defExports.arenaCloserLite = {
     PARENT: [defExports.arenaCloserParentLite],
+TOOLTIP: `You have arena closer properties, but the power of a basic.`,
     GUNS: [{
         POSITION: [14, 10, 1, 0, 0, 0, 0],
         PROPERTIES: {
