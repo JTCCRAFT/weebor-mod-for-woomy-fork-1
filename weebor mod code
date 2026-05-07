@@ -578,3 +578,27 @@ defExports.washeewasheeomega = {
 		}
 	},
 };
+defExports.washeewasheealeph = {
+	PARENT: [defExports.genericTank],
+    LABEL: "r̸̡̔ ̸͔̀ơ̶͈ ̵̫͘l̴̝̂ ̸͔̅ḻ̶̍ ̸̤̕f̵̠͑ ̷͉́à̶̡ ̵̻̎c̸͕̒ ̷̜̐ ̴͉͆g̸̹̋ ̸̩̿ĩ̵̭ ̶͔̌f̷̨̽ ̶̯͠t̸̤̒ ̵͚̿b̴̯͝ ̴̩̑o̵̝͋ ̵͍̽x̶͓̒ ̶̛͖ ̷̙̎Ȕ̵̲ ̸͕͂N̴͚͊ ̶̢̋I̸̧͝ ̷̣̐V̸̱́ ̵̘̆Ẹ̷͒ ̴̫̏R̸̗̀ ̸̝͘S̵̢͌ ̶̜̎E̶̟͒",
+	SIZE: 150,
+	VALUE: 1500000,
+    SHAPE: 10017,
+	BODY: {
+        HEALTH: food.HEALTH * 10000
+    },
+    PROPS: [makeAura("#000030",10)],
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(100);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.washeewasheeomega);
+		}
+	},
+};
