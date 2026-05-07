@@ -48,6 +48,18 @@ defExports.basic = {
                 index: Class.observer.index,
                 tier: 4
             });
+				me.upgrades.push({
+                class: "oneshotter",
+                level: 60,
+                index: Class.oneshotter.index,
+                tier: 4
+            });
+			me.upgrades.push({
+                class: "oneshotterreverse",
+                level: 60,
+                index: Class.oneshotterreverse.index,
+                tier: 4
+            });
         } 
     }
 };
@@ -431,7 +443,7 @@ defExports.snlAuto3.UPGRADES_TIER_4 = [defExports.snlAuto10];
 defExports.oneshotter = {
     PARENT: [defExports.genericTank],
     LABEL: 'One Shotter',
-	TOOLTIP: `This is from arrasdiss if ya couldn't tell`,
+	TOOLTIP: `One shot everything at the cost of your life, this is from arrasdiss if ya couldn't tell`,
     DANGER: 7,
 	ON_DEALT_DAMAGE: (me, them) => {
                     me.kill(), them.kill();
@@ -458,7 +470,7 @@ defExports.oneshotter = {
 defExports.oneshotterreverse = {
     PARENT: [defExports.genericTank],
     LABEL: 'One Healer',
-	TOOLTIP: `This is from arrasdiss aswell`,
+	TOOLTIP: `The opposite of One shotter, this is from arrasdiss aswell`,
     DANGER: 7,
 	ON_DEALT_DAMAGE: (me, them) => {
                     me.kill(), them.heal();
