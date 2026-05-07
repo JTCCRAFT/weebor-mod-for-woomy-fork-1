@@ -609,3 +609,89 @@ defExports.sansAI = {
         STRAFE: true
     }
 };
+defExports.sans2AI = {
+    PARENT: [defExports.genericTank],
+	COLOR: "#9999ff",
+	VALUE: 50000,
+	TEAM: 100,
+	NAME: "Empowered Snes",
+    LABEL: 'Sans',
+    DANGER: 6,
+	SKILL: setSkill(9, 9, 9, 9, 9, 9, 9, 9, 9, 9),
+    FACING_TYPE: 'sans',
+    BODY: {
+        HEALTH: 2,
+        DAMAGE: 1
+    },
+    GUNS: [{
+        POSITION: [18, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sans]),
+            TYPE: defExports.sansBullet,
+        },
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.fake]),
+            TYPE: defExports.bullet,
+            ALT_FIRE: true,
+            ON_FIRE: function (gun, gunInfo) {
+                gun.fire(gunInfo);
+                let angle = Math.random() * Math.PI * 2,
+                    dist = Math.max(.75, Math.random() * 1.5) * gun.body.master.size * 30;
+                gun.body.master.x += Math.cos(angle) * dist;
+                gun.body.master.y += Math.sin(angle) * dist;
+            }
+        }
+    }],
+	CONTROLLERS: [ /*'avoid', */ 'nearestDifferentMaster', 'mapAltToFire', 'minion', 'fleeAtLowHealth'],
+    AI: {
+        STRAFE: true
+    }
+};
+
+defExports.f150 = {
+    PARENT: [defExports.genericTank],
+    LABEL: "no fuck off",
+    SHAPE: 10017
+};
+
+defExports.f150ifitwasstillthethingitusedtobe = {
+    PARENT: [defExports.genericTank],
+    LABEL: "FORD F150",
+    TYPE: "CAR",
+    FACING_TYPE: "smoothToTarget",
+    SKILL: setSkill(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    SKILL_CAP: setSkill(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    HAS_NO_SKILL_POINTS: true,
+    DISPLAY_AMMO_TEXT: false,
+    LEVEL: 60,
+    SIZE: 60,
+    AMMO: 2,
+    BODY: {
+        SPEED: base.SPEED * 8,
+        ACCELERATION: base.ACCEL * 4,
+    },
+    GUNS: [{
+        POSITION: [1, 12, 1, 0, 0, 180, 0],
+        PROPERTIES: {
+            AMMO_PER_SHOT: 1,
+            SHOOT_SETTINGS: combineStats([g.more_reload, g.more_reload, g.more_reload, g.more_reload, g.no_spread, g.no_speed, g.no_spread, g.no_speed, g.more_recoil, g.more_recoil, g.more_recoil]),
+            TYPE: defExports.treadmarks,
+            AUTOFIRE: true,
+        }
+    }],
+    MOTION_TYPE: "tokyoDrift",
+    SHAPE: 10018,
+    GOD_MODE: true,
+    ON_TICK: (me) => {
+        if (me.velocity.length > 20) {
+            me.ammo = 2
+        } else {
+            me.ammo = 0
+        }
+    },
+    ON_COLLIDE: (me, them) => {
+        them.kill()
+    },
+};
