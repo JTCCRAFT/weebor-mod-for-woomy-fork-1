@@ -569,3 +569,43 @@ defExports.washeewasheealeph = {
 		}
 	},
 };
+
+defExports.sansAI = {
+    PARENT: [defExports.genericTank],
+	COLOR: "#9999ff",
+	VALUE: 50000,
+	TEAM: 100,
+	NAME: "Snes",
+    LABEL: 'Sans',
+    DANGER: 6,
+    FACING_TYPE: 'sans',
+    BODY: {
+        HEALTH: 1,
+        DAMAGE: 1
+    },
+    GUNS: [{
+        POSITION: [18, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sans]),
+            TYPE: defExports.sansBullet,
+        },
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.fake]),
+            TYPE: defExports.bullet,
+            ALT_FIRE: true,
+            ON_FIRE: function (gun, gunInfo) {
+                gun.fire(gunInfo);
+                let angle = Math.random() * Math.PI * 2,
+                    dist = Math.max(.75, Math.random() * 1.5) * gun.body.master.size * 30;
+                gun.body.master.x += Math.cos(angle) * dist;
+                gun.body.master.y += Math.sin(angle) * dist;
+            }
+        }
+    }],
+	CONTROLLERS: [ /*'avoid', */ 'nearestDifferentMaster', 'mapAltToFire', 'minion', 'fleeAtLowHealth'],
+    AI: {
+        STRAFE: true
+    }
+};
