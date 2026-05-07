@@ -427,3 +427,142 @@ for (let i = 0; i < 10; i++) {
 }
 defExports.retsarBombaLauncher.UPGRADES_TIER_4 = [defExports.snlAuto3];
 defExports.snlAuto3.UPGRADES_TIER_4 = [defExports.snlAuto10];
+
+defExports.oneshotter = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'One Shotter',
+	TOOLTIP: `This is from arrasdiss if ya couldn't tell`,
+    DANGER: 7,
+	ON_DEALT_DAMAGE: (me, them) => {
+                    me.kill(), them.kill();
+                },
+    BODY: {
+        FOV: 1.05,
+        DAMAGE: base.DAMAGE * 1,
+        SPEED: base.SPEED * 1.5,
+		HEALTH: 0.1,
+        DENSITY: base.DENSITY * 2
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    STAT_NAMES: statNames.smasher,
+	PROPS: [makeAura(19,0.5)],
+    TURRETS: [{
+        POSITION: [20.5, 0, 0, 0, 360, 0],
+        TYPE: defExports.weirdSpikeBody1
+    }, {
+        POSITION: [20.5, 0, 0, 180, 360, 0],
+        TYPE: defExports.weirdSpikeBody2
+    }]
+};
+defExports.oneshotterreverse = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'One Healer',
+	TOOLTIP: `This is from arrasdiss aswell`,
+    DANGER: 7,
+	ON_DEALT_DAMAGE: (me, them) => {
+                    me.kill(), them.heal();
+                },
+    BODY: {
+        FOV: 1.05,
+        DAMAGE: base.DAMAGE * 1,
+        SPEED: base.SPEED * 1.5,
+		HEALTH: 0.1,
+        DENSITY: base.DENSITY * 2
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    STAT_NAMES: statNames.smasher,
+	PROPS: [makeAura(8,0.5)],
+    TURRETS: [{
+        POSITION: [20.5, 0, 0, 0, 360, 0],
+        TYPE: defExports.weirdSpikeBody1
+    }, {
+        POSITION: [20.5, 0, 0, 180, 360, 0],
+        TYPE: defExports.weirdSpikeBody2
+    }]
+};
+defExports.washeewashee = {
+	PARENT: [defExports.genericTank],
+    LABEL: "rollfac giftbox",
+	SIZE: 15,
+	VALUE: 15000,
+    SHAPE: 10017,
+    PROPS: [makeAura(8)],
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(10);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.square);
+		}
+	},
+};
+defExports.washeewasheesuper = {
+	PARENT: [defExports.genericTank],
+    LABEL: "overloaded rollfac giftbox",
+	SIZE: 45,
+	VALUE: 15000,
+    SHAPE: 10017,
+    PROPS: [makeAura(8)],
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(25);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.washeewashee);
+		}
+	},
+};
+defExports.washeewasheehyper = {
+	PARENT: [defExports.genericTank],
+    LABEL: "DANGEROUSLY OVERLOADED rollfac giftbox",
+	SIZE: 100,
+	VALUE: 15000,
+    SHAPE: 10017,
+    PROPS: [makeAura("#ff0000")],
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(10);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.washeewasheesuper);
+		}
+	},
+};
+defExports.washeewasheeomega = {
+	PARENT: [defExports.genericTank],
+    LABEL: "rollfac giftbox singularity (oh noes)",
+	SIZE: 10,
+	VALUE: 15000,
+    SHAPE: 10017,
+    PROPS: [makeAura("#000000",5)],
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(10);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.washeewasheehyper);
+		}
+	},
+};
