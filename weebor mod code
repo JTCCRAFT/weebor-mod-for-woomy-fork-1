@@ -54,10 +54,22 @@ defExports.basic = {
                 index: Class.oneshotter.index,
                 tier: 4
             });
-			me.upgrades.push({
+				me.upgrades.push({
                 class: "oneshotterreverse",
                 level: 60,
                 index: Class.oneshotterreverse.index,
+                tier: 4
+            });
+				me.upgrades.push({
+                class: "oneicer",
+                level: 60,
+                index: Class.oneicer.index,
+                tier: 4
+            });
+				me.upgrades.push({
+                class: "onecrippler",
+                level: 60,
+                index: Class.onecrippler.index,
                 tier: 4
             });
         } 
@@ -601,4 +613,59 @@ defExports.washeewasheealeph = {
 			crash.define(Class.washeewasheeomega);
 		}
 	},
+};
+
+defExports.oneicer = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'The Bing Chiller',
+	TOOLTIP: `touch someone to Bing Chillin em for an hour, NOT from arrasdiss this time!`,
+    DANGER: 7,
+	ON_DEALT_DAMAGE: (me, them) => {
+                    me.kill(), them.ice(them, 1, 3600);
+                },
+    BODY: {
+        FOV: 1.05,
+        DAMAGE: base.DAMAGE * 1,
+        SPEED: base.SPEED * 1.5,
+		HEALTH: 0.1,
+        DENSITY: base.DENSITY * 2
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    STAT_NAMES: statNames.smasher,
+	PROPS: [makeAura(217,0.5)],
+    TURRETS: [{
+        POSITION: [20.5, 0, 0, 0, 360, 0],
+        TYPE: defExports.weirdSpikeBody1
+    }, {
+        POSITION: [20.5, 0, 0, 180, 360, 0],
+        TYPE: defExports.weirdSpikeBody2
+    }]
+};
+defExports.onecrippler = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Kneecaps Breaker',
+	TOOLTIP: `not that tanks have kneecaps in my lore tho...`,
+    DANGER: 7,
+	ON_DEALT_DAMAGE: (me, them) => {
+                    me.kill(), paralyze(them, 0.7, 3600);
+                },
+    BODY: {
+        FOV: 1.05,
+        DAMAGE: base.DAMAGE * 1,
+        SPEED: base.SPEED * 1.5,
+		HEALTH: 0.1,
+        DENSITY: base.DENSITY * 2
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    STAT_NAMES: statNames.smasher,
+	PROPS: [makeAura(3,0.5)],
+    TURRETS: [{
+        POSITION: [20.5, 0, 0, 0, 360, 0],
+        TYPE: defExports.weirdSpikeBody1
+    }, {
+        POSITION: [20.5, 0, 0, 180, 360, 0],
+        TYPE: defExports.weirdSpikeBody2
+    }]
 };
