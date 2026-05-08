@@ -607,7 +607,21 @@ defExports.sansAI = {
 	CONTROLLERS: [ /*'avoid', */ 'nearestDifferentMaster', 'mapAltToFire', 'minion', 'fleeAtLowHealth'],
     AI: {
         STRAFE: true
-    }
+    },
+		ON_DEAD: function ({ sockets, ran, Entity }) {
+		sockets.broadcast("erererer", "#9999ff");
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.sans2AI);
+		}
+	}
 };
 defExports.sans2AI = {
     PARENT: [defExports.genericTank],
@@ -623,6 +637,7 @@ defExports.sans2AI = {
         HEALTH: 2,
         DAMAGE: 1
     },
+	PROPS: [makeAura(8, 0.5)],
     GUNS: [{
         POSITION: [18, 8, 1, 0, 0, 0, 0],
         PROPERTIES: {
@@ -647,7 +662,21 @@ defExports.sans2AI = {
 	CONTROLLERS: [ /*'avoid', */ 'nearestDifferentMaster', 'mapAltToFire', 'minion', 'fleeAtLowHealth'],
     AI: {
         STRAFE: true
-    }
+    },
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		sockets.broadcast("ererererererr...", "#ff2222");
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.sans3AI);
+		}
+	}
 };
 
 defExports.f150 = {
@@ -694,4 +723,46 @@ defExports.f150ifitwasstillthethingitusedtobe = {
     ON_COLLIDE: (me, them) => {
         them.kill()
     },
+};
+
+defExports.sans3AI = {
+    PARENT: [defExports.genericTank],
+	COLOR: "#9999ff",
+	VALUE: 50000,
+	TEAM: 100,
+	NAME: "True Snes",
+    LABEL: 'Sans',
+    DANGER: 6,
+	SKILL: setSkill(9, 9, 9, 9, 9, 9, 9, 9, 9, 9),
+    FACING_TYPE: 'sans',
+    BODY: {
+        HEALTH: 2,
+        DAMAGE: 1
+    },
+	PROPS: [makeAura(2, 0.5)],
+    GUNS: [{
+        POSITION: [18, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sans, g.triple_reload]),
+            TYPE: defExports.sansBullet,
+        },
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.fake]),
+            TYPE: defExports.bullet,
+            ALT_FIRE: true,
+            ON_FIRE: function (gun, gunInfo) {
+                gun.fire(gunInfo);
+                let angle = Math.random() * Math.PI * 2,
+                    dist = Math.max(.75, Math.random() * 1.5) * gun.body.master.size * 30;
+                gun.body.master.x += Math.cos(angle) * dist;
+                gun.body.master.y += Math.sin(angle) * dist;
+            }
+        }
+    }],
+	CONTROLLERS: [ /*'avoid', */ 'nearestDifferentMaster', 'mapAltToFire', 'minion', 'fleeAtLowHealth'],
+    AI: {
+        STRAFE: true
+    }
 };
