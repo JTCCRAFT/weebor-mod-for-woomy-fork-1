@@ -824,9 +824,9 @@ defExports.sans4AI = {
 	BROADCAST_MESSAGE: "ererererereeerrereree (ok you win gro i give up)"
 };
 
-defExports.NRORranger = {
+defExports.NRranger = {
     PARENT: [defExports.genericTank],
-    LABEL: 'NROR-Ranger',
+    LABEL: 'NR-Ranger',
     DANGER: 7,
     BODY: {
         ACCELERATION: base.ACCEL * .5,
@@ -843,9 +843,9 @@ defExports.NRORranger = {
         POSITION: [5, 8.5, -1.6, 8, 0, 0, 0]
     }]
 };
-defExports.NRORannihilator = {
+defExports.NRannihilator = {
     PARENT: [defExports.genericTank],
-    LABEL: 'NROR-Annihilator',
+    LABEL: 'NR-Annihilator',
     DANGER: 7,
     BODY: {
         ACCELERATION: base.ACCEL * .75
@@ -858,9 +858,9 @@ defExports.NRORannihilator = {
         }
     }]
 };
-defExports.NRORpenta = {
+defExports.NRpenta = {
     PARENT: [defExports.genericTank],
-    LABEL: 'NROR-Penta Shot',
+    LABEL: 'NR-Penta Shot',
     DANGER: 7,
     BODY: {
         SPEED: base.SPEED * .9
