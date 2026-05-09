@@ -823,3 +823,77 @@ defExports.sans4AI = {
     },
 	BROADCAST_MESSAGE: "ererererereeerrereree (ok you win gro i give up)"
 };
+
+defExports.NRranger = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'NR-Ranger',
+    DANGER: 7,
+    BODY: {
+        ACCELERATION: base.ACCEL * .5,
+        SPEED: base.SPEED * .8,
+        FOV: base.FOV * 1.4
+    },
+    GUNS: [{
+        POSITION: [32, 8.5, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.ranger, g.no_recoil, g.unfathomable_reload]),
+            TYPE: defExports.bullet
+        }
+    }, {
+        POSITION: [5, 8.5, -1.6, 8, 0, 0, 0]
+    }]
+};
+defExports.NRannihilator = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'NR-Annihilator',
+    DANGER: 7,
+    BODY: {
+        ACCELERATION: base.ACCEL * .75
+    },
+    GUNS: [{
+        POSITION: [20.5, 19.5, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.anni, g.no_recoil, g.unfathomable_reload]),
+            TYPE: defExports.bullet
+        }
+    }]
+};
+defExports.NRpenta = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'NR-Penta Shot',
+    DANGER: 7,
+    BODY: {
+        SPEED: base.SPEED * .9
+    },
+    GUNS: [{
+        POSITION: [16, 8, 1, 0, -3, -30, 2 / 3],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent, g.bit_less_damage, g.no_recoil, g.unfathomable_reload]),
+            TYPE: defExports.bullet
+        }
+    }, {
+        POSITION: [16, 8, 1, 0, 3, 30, 2 / 3],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent, g.bit_less_damage, g.no_recoil, g.unfathomable_reload]),
+            TYPE: defExports.bullet
+        }
+    }, {
+        POSITION: [19, 8, 1, 0, -2, -15, 1 / 3],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent, g.bit_less_damage, g.no_recoil, g.unfathomable_reload]),
+            TYPE: defExports.bullet
+        }
+    }, {
+        POSITION: [19, 8, 1, 0, 2, 15, 1 / 3],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent, g.bit_less_damage, g.no_recoil, g.unfathomable_reload]),
+            TYPE: defExports.bullet
+        }
+    }, {
+        POSITION: [22, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent, g.bit_less_damage, g.no_recoil, g.unfathomable_reload]),
+            TYPE: defExports.bullet
+        }
+    }]
+};
