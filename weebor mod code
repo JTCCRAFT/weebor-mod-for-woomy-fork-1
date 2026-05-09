@@ -1152,3 +1152,76 @@ defExports.devariantedfinalAI = {
     VALUE: 8e5,
     BROADCAST_MESSAGE: 'The GT_9500 has finnaly ran out of variants!'
 };
+
+defExports.ultimateGuardian = {
+    PARENT: [defExports.guardian],
+    LABEL: 'Ultimate Guardian',
+    COLOR: 8,
+    BODY: {
+        FOV: 1.2,
+        HEALTH: 8000,
+        REGEN: .007,
+        SPEED: 1.58,
+        ACCELERATION: 1.04
+    },
+    ON_DEALT_DAMAGE: (me, them) => {
+        emp(them, 10);
+		poison(me, them, 1, 1);
+		ice(me, them, 1, 1);
+		pepperspray(them, 20, 1.5);
+    },
+    GUNS: [{
+        POSITION: [6, 12, 1.25, 6, 0, 180, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.swarm, g.more_recoil, g.guardian]),
+            TYPE: [defExports.drone, {
+                CONTROLLERS: ['nearestDifferentMaster', 'canRepel', 'hangOutNearMaster'],
+                ON_DEALT_DAMAGE: (me, them) => {
+                    emp(them, 4);
+					poison(me, them, 1, 1);
+					ice(me, them, 1, 1);
+					shrivel(them, 1, 2);
+					pepperspray(them, 20, 1.5);
+                },
+            }],
+            STAT_CALCULATOR: gunCalcNames.swarm,
+            AUTOFIRE: true
+        }
+    }],
+    PROPS: [
+        makeAura(8), {
+            POSITION: [0.25, 0, 0, 30, 1],
+            SHAPE: 6,
+            COLOR: 243
+        }, {
+            POSITION: [0.5, 0, 0, 180, 1],
+            SHAPE: [
+                [-0.8, 0.475],
+                [-0.275, 0.475],
+                [0.275, -0.475],
+                [0, -0.95],
+                [-0.275, -0.5],
+                [0.275, 0.475],
+                [0.8, 0.475],
+                [0.55, 0],
+                [-0.55, 0]
+            ],
+            COLOR: 243
+        }
+    ],
+};
+defExports.ultimateGuardianAI = {
+    PARENT: [defExports.ultimateGuardian],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(9, 9, 9, 9, 9, 9, 9, 9, 9, 9),
+    VALUE: 8e6,
+    BROADCAST_MESSAGE: 'The ULTIMA_7 has been overpowered!'
+};
