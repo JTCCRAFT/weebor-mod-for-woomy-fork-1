@@ -897,3 +897,258 @@ defExports.NRpenta = {
         }
     }]
 };
+
+defExports.devariantedAI = {
+    PARENT: [defExports.miniboss],
+    LABEL: 'Devarianted',
+    DANGER: 8,
+    SHAPE: 3,
+    COLOR: 18,
+    SIZE: 20,
+    MAX_CHILDREN: 24,
+    STAT_NAMES: statNames.drone,
+    VARIES_IN_SIZE: false,
+    FACING_TYPE: 'smoothToTarget',
+    VALUE: 6e4,
+    SKILL: setSkill(1, 1, 9, 7, 7, 7, 9, 1, 1, 1),
+    BODY: {
+        FOV: 1.1,
+        SPEED: base.SPEED * .1,
+        HEALTH: base.HEALTH * 7.5,
+        DAMAGE: base.DAMAGE * 2.5,
+        REGEN: base.REGEN * .75
+    },
+    HAS_NO_SKILL_POINTS: true,
+    GUNS: [{
+        POSITION: [6, 12, 1.25, 6, 0, 180, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.swarm, g.more_recoil, g.guardian]),
+            TYPE: defExports.drone,
+            STAT_CALCULATOR: gunCalcNames.swarm,
+            AUTOFIRE: true
+        }
+    }],
+    ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.devarianted1AI);
+		}
+	}
+};
+defExports.devarianted1AI = {
+    PARENT: [defExports.greenGuardian],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 6e5,
+    BROADCAST_MESSAGE: 'A Green Guardian has been defeated!',
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.devarianted2AI);
+		}
+	}
+};
+defExports.devarianted2AI = {
+    PARENT: [defExports.s2_22],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 8e5,
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.devarianted3AI);
+		}
+	}
+};
+defExports.devarianted3AI = {
+    PARENT: [defExports.lavenderGuardian],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 6e5,
+    ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.devarianted4AI);
+		}
+	}
+};
+defExports.devarianted4AI = {
+    PARENT: [defExports.cranberryGuardian],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 6e5,
+    ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.devarianted5AI);
+		}
+	}
+};
+defExports.devarianted5AI = {
+    PARENT: [defExports.at4_bw],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 8e5,
+    ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.devarianted6AI);
+		}
+	}
+};
+defExports.devarianted6AI = {
+    PARENT: [defExports.hb3_37],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 8e5,
+    ON_DEAD: function ({ sockets, ran, Entity }) {
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.devariantedfinalAI);
+		}
+	}
+};
+defExports.devariantedfinal = {
+    PARENT: [defExports.guardian],
+    LABEL: 'Devarianted',
+    COLOR: 34,
+    BODY: {
+        FOV: 1.2,
+        HEALTH: 6000,
+        REGEN: .007,
+        SPEED: 1.58,
+        ACCELERATION: 1.04
+    },
+    GUNS: [{
+        POSITION: [6, 12, 1.25, 6, 0, 180, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.swarm, g.more_recoil, g.guardian]),
+            TYPE: [defExports.drone, {
+                CONTROLLERS: ['nearestDifferentMaster', 'canRepel', 'hangOutNearMaster'],
+                ON_DEALT_DAMAGE: (me, them) => {
+                    pepperspray(them, 20, 1.5);
+                },
+            }],
+            STAT_CALCULATOR: gunCalcNames.swarm,
+            AUTOFIRE: true
+        }
+    }],
+    ON_DEALT_DAMAGE: (me, them) => {
+        pepperspray(them, 20, 1.5);
+    },
+    PROPS: [
+        makeAura(34)
+    ]
+};
+defExports.devariantedfinalAI = {
+    PARENT: [defExports.devariantedfinal],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(9, 9, 9, 9, 9, 9, 9, 9, 9, 9),
+    VALUE: 8e5,
+    BROADCAST_MESSAGE: 'The GT_9500 has finnaly ran out of variants!'
+};
