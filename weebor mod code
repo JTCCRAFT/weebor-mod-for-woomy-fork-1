@@ -765,5 +765,61 @@ defExports.sans3AI = {
 	CONTROLLERS: [ /*'avoid', */ 'nearestDifferentMaster', 'mapAltToFire', 'minion', 'fleeAtLowHealth'],
     AI: {
         STRAFE: true
-    }
+    },
+	ON_DEAD: function ({ sockets, ran, Entity }) {
+		sockets.broadcast("erererererererrrereer. (no more screwing around anymore)", "#000033");
+		let x = this.x,
+			y = this.y,
+			rand = Math.floor(1);
+		for (let i = 0; i < rand; i++) {
+			let crash = new Entity({
+				x: x,
+				y: y
+			})
+			crash.team = this.team;
+			crash.define(Class.sans4AI);
+		}
+	}
+};
+defExports.sans4AI = {
+    PARENT: [defExports.genericTank],
+	COLOR: "#9999ff",
+	VALUE: 50000,
+	TEAM: 100,
+	NAME: "Snes: last slice of bread",
+    LABEL: 'Sans',
+    DANGER: 6,
+	SKILL: setSkill(9, 9, 9, 9, 9, 9, 9, 9, 9, 9),
+    FACING_TYPE: 'sans',
+    BODY: {
+        HEALTH: 2,
+        DAMAGE: 1
+    },
+	PROPS: [makeAura(19, 0.5)],
+    GUNS: [{
+        POSITION: [18, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sans, g.unfathomable_reload]),
+            TYPE: defExports.sansBullet,
+        },
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.fake]),
+            TYPE: defExports.bullet,
+            ALT_FIRE: true,
+            ON_FIRE: function (gun, gunInfo) {
+                gun.fire(gunInfo);
+                let angle = Math.random() * Math.PI * 2,
+                    dist = Math.max(.75, Math.random() * 1.5) * gun.body.master.size * 30;
+                gun.body.master.x += Math.cos(angle) * dist;
+                gun.body.master.y += Math.sin(angle) * dist;
+            }
+        }
+    }],
+	CONTROLLERS: [ /*'avoid', */ 'nearestDifferentMaster', 'mapAltToFire', 'minion', 'fleeAtLowHealth'],
+    AI: {
+        STRAFE: true
+    },
+	BROADCAST_MESSAGE: "ererererereeerrereree (ok you win gro i give up)"
 };
