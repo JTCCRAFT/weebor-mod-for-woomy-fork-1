@@ -681,8 +681,9 @@ defExports.sans2AI = {
 
 defExports.f150 = {
     PARENT: [defExports.genericTank],
-    LABEL: "no fuck off",
-    SHAPE: 10017
+	TOOLTIP: "A mere fragment of what this server once had...",
+    LABEL: "fraud150",
+    SHAPE: 10018
 };
 
 defExports.f150ifitwasstillthethingitusedtobe = {
