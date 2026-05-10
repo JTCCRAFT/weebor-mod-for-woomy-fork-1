@@ -1513,3 +1513,65 @@ defExports.rushsmash = {
         });
     }
 };
+defExports.rushoneshotter = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Lightspeed Ender',
+	TOOLTIP: `One shot everything at the cost of your life at breathtaking speeds (how scaaaary)`,
+    DANGER: 7,
+	ON_DEALT_DAMAGE: (me, them) => {
+                    me.kill(), them.kill();
+                },
+    BODY: {
+        FOV: 1.05,
+        DAMAGE: base.DAMAGE * 1,
+        SPEED: base.SPEED * 5,
+		ACCELERATION: 5,
+		HEALTH: 0.1,
+        DENSITY: base.DENSITY * 2
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    STAT_NAMES: statNames.smasher,
+	PROPS: [makeAura(19,0.5), makeShell({
+            size: 1.1,
+            color: 1,
+            shape: -6
+        }),],
+    TURRETS: [{
+        POSITION: [20.5, 0, 0, 0, 360, 0],
+        TYPE: defExports.weirdSpikeBody1
+    }, {
+        POSITION: [20.5, 0, 0, 180, 360, 0],
+        TYPE: defExports.weirdSpikeBody2
+    }]
+};
+defExports.rushsmashsuper = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'GET OUT OF MY WAAAAAAAAAY!!!!!!!',
+	TOOLTIP: "GGGRRRRRAAAAAAAAAAHHHHHHHHHHHHH!!",
+    DANGER: 6,
+    BODY: {
+        FOV: base.FOV * 1.05,
+        SPEED: base.SPEED * 15,
+        DENSITY: base.DENSITY * 2,
+		ACCELERATION: 15,
+        HEALTH: base.HEALTH * 1.4,
+        SHIELD: base.SHIELD * 1.4
+    },
+    PROPS: [makeShell({
+            size: 1.3,
+            color: "#0000ff",
+            shape: -6
+        })],
+    IS_SMASHER: true,
+    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    STAT_NAMES: statNames.smasher,
+    ON_DEFINED: (me) => {
+        if (Math.floor(Math.random() * 100) == 0) me.upgrades.push({
+            class: "fourfour",
+            level: 60,
+            index: Class.fourfour.index,
+            tier: 4
+        });
+    }
+};
