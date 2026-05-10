@@ -1486,6 +1486,7 @@ defExports.NRtrueTrueNecromancer = {
 defExports.rushsmash = {
     PARENT: [defExports.genericTank],
     LABEL: 'Rusher',
+	TOOLTIP: "This is from eternia, also my favorite tank from there :DD",
     DANGER: 6,
     BODY: {
         FOV: base.FOV * 1.05,
