@@ -1268,3 +1268,118 @@ defExports.heliPropAA = {
         POSITION: [666, 9, 1, 0, 0, 270, 0]
     }]
 };
+
+defExports.bluelittleMissileDeltra = {
+    PARENT: [defExports.littleMissile],
+    ON_DEALT_DAMAGE: (me, them) => {
+        poison(me, them, 1, 1);
+    },
+    GUNS: [{
+        POSITION: [14, 6, 1, 0, 0, 180, 0],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.skim, g.skim_missile]),
+            TYPE: [defExports.bullet, {
+                PERSISTS_AFTER_DEATH: true,
+                ON_DEALT_DAMAGE: (me, them) => {
+                    poison(me, them, 0.5, 1);
+                },
+            }],
+            STAT_CALCULATOR: gunCalcNames.thruster,
+        }
+    }]
+};
+defExports.bluedeltrabladeSkimTurret = makeAuto({
+    LABEL: 'Launcher',
+    BODY: {
+        FOV: 2
+    },
+    CONTROLLERS: ['nearestDifferentMaster'],
+    COLOR: 16,
+    HAS_NO_RECOIL: true,
+    GUNS: [{
+        POSITION: [4, 6, 1.8, 18, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.hunter2, g.less_reload, g.bit_more_reload]),
+            TYPE: defExports.bluelittleMissileDeltra,
+        }
+    }, {
+        POSITION: [20, 11, 1, 0, 0, 0, .25]
+    }, {
+        POSITION: [8.1, 11, -1.6, 4.9, 0, 0, 0]
+    }]
+}, '', {
+    type: defExports.eggBossCircleProp,
+    color: 6,
+    size: 12
+});
+defExports.bluedeltrablade = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Frost Deltrablade',
+    SIZE: 26,
+    DANGER: 8,
+    SHAPE: 108,
+    COLOR: 217,
+    FACING_TYPE: 'autospin',
+    BODY: {
+        HEALTH: 1500,
+        DAMAGE: base.DAMAGE * 1.5,
+        REGEN: base.REGEN * .75,
+        SPEED: base.SPEED * .3,
+        ACCELARATION: base.ACCEL * .3
+    },
+    ON_DEALT_DAMAGE: (me, them) => {
+        ice(me, them, 2, 2);
+    },
+    GUNS: [{
+        POSITION: [11, 5, 1, -2, 0, 60, 0]
+    }, {
+        POSITION: [3, 5, 1.7, 9, 0, 60, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.trap, g.defend]),
+            TYPE: [defExports.trap, {
+                ON_DEALT_DAMAGE: (me, them) => {
+                    ice(me, them, 1, 1);
+                },
+            },],
+            STAT_CALCULATOR: gunCalcNames.trap,
+        }
+    }, {
+        POSITION: [11, 5, 1, -2, 0, 180, 0]
+    }, {
+        POSITION: [3, 5, 1.7, 9, 0, 180, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.trap, g.defend]),
+            TYPE: [defExports.trap, {
+                ON_DEALT_DAMAGE: (me, them) => {
+                    ice(me, them, 1, 1);
+                },
+            },],
+            STAT_CALCULATOR: gunCalcNames.trap,
+        }
+    }, {
+        POSITION: [11, 5, 1, -2, 0, 300, 0]
+    }, {
+        POSITION: [3, 5, 1.7, 9, 0, 300, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.trap, g.defend]),
+            TYPE: [defExports.trap, {
+                ON_DEALT_DAMAGE: (me, them) => {
+                    ice(me, them, 1, 1);
+                },
+            },],
+            STAT_CALCULATOR: gunCalcNames.trap,
+        }
+    }],
+    TURRETS: [{
+        POSITION: [6.5, 6.5, 0, 0, 360, 1],
+        TYPE: defExports.bluedeltrabladeSkimTurret
+    }, {
+        POSITION: [6.5, 6.5, 0, 120, 360, 1],
+        TYPE: defExports.bluedeltrabladeSkimTurret
+    }, {
+        POSITION: [6.5, 6.5, 0, 240, 360, 1],
+        TYPE: defExports.bluedeltrabladeSkimTurret
+    },],
+    PROPS: [makeAura(217)]
+};
