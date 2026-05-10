@@ -1,0 +1,167 @@
+defExports.cheesecakeslice = {
+    PARENT: [defExports.guardian],
+    LABEL: 'S2_43',
+    COLOR: 3,
+    BODY: {
+        FOV: 1.2,
+        HEALTH: 6000,
+        REGEN: .007,
+        SPEED: 1.58,
+        ACCELERATION: 1.04
+    },
+    GUNS: [{
+        POSITION: [6, 12, 1.25, 6, 0, 180, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.swarm, g.more_recoil, g.guardian]),
+            TYPE: [defExports.drone, {
+                CONTROLLERS: ['nearestDifferentMaster', 'canRepel', 'hangOutNearMaster'],
+                ON_DEALT_DAMAGE: (me, them) => {
+                    paralyze(them, 0.7/*0.75*/);
+                },
+            }],
+            STAT_CALCULATOR: gunCalcNames.swarm,
+            AUTOFIRE: true
+        }
+    }],
+    ON_DEALT_DAMAGE: (me, them) => {
+        paralyze(them, 0.7/*0.75*/);
+    },
+    PROPS: [
+        makeAura(3)
+    ]
+};
+defExports.cheesecakesliceAI = {
+    PARENT: [defExports.cheesecakeslice],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 8e5,
+    BROADCAST_MESSAGE: 'An S2_43 has been defeated!'
+};
+defExports.cheesecake = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Cheesecake',
+    DANGER: 9,
+    SHAPE: 309,
+    COLOR: 3,
+    SIZE: 48,
+    HAS_NO_RECOIL: true,
+    BODY: {
+        FOV: .775,
+        SPEED: 1,
+        ACCELERATION: .1,
+        HEALTH: 2000,
+        DAMAGE: 5.25,
+        REGEN: .015,
+        PUSHABILITY: .05
+    },
+    FACING_TYPE: 'spinSlowly2',
+    GUNS: [],
+	PROPS: [
+        makeAura(3)
+    ],
+    TURRETS: [],
+	ON_DEAD: function({ sockets, ran, Entity }){
+		let x = this.x,
+			y = this.y;
+		setTimeout(() => {
+			sockets.broadcast("You done sliced the Cheesecake");
+			for (let i = 0; i < 5; i++) {
+				let boss = new Entity({
+					x: x,
+					y: y
+				});
+				boss.team = this.team;
+				boss.define(Class.cheesecakesliceAI);
+			}
+		}, 3000);
+	}
+};
+for (let i = 0; i < 5; i++) defExports.cheesecake.TURRETS = defExports.cheesecake.TURRETS.concat({
+    POSITION: [14, 5.4, 0, i * 72 + 36, 0, 1],
+    TYPE: defExports.cheeseBody
+});
+for (let i = 0; i < 5; i++) defExports.cheesecake.GUNS.push({
+    POSITION: [4, 8, 1.25, 8, 0, i * 72 + 36, 0],
+    PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.swarm, g.more_recoil, g.guardian, g.bit_smaller]),
+        TYPE: defExports.drone,
+        STAT_CALCULATOR: gunCalcNames.swarm,
+		ON_DEALT_DAMAGE: (me, them) => {
+        paralyze(them, 0.7/*0.75*/);
+    },
+        AUTOFIRE: true,
+        MAX_CHILDREN: 12,
+    }
+});
+defExports.cheeseBody = {
+    SHAPE: 268,
+    COLOR: 3
+};
+defExports.cheesecakeAI = {
+    PARENT: [defExports.cheesecake],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 1e6,
+    BROADCAST_MESSAGE: `By destroying the Cheesecake you realize...`,
+	ON_DEAD: function({ sockets, ran, Entity }){
+		let x = this.x,
+			y = this.y;
+		setTimeout(() => {
+			sockets.broadcast("You done sliced the Cheesecake");
+			for (let i = 0; i < 5; i++) {
+				let boss = new Entity({
+					x: x,
+					y: y
+				});
+				boss.team = this.team;
+				boss.define(Class.cheesecakesliceAI);
+			}
+		}, 3000);
+	}
+};
+defExports.pentaguardianAI = {
+    PARENT: [defExports.pentaguardian],
+    TYPE: 'miniboss',
+    CONTROLLERS: ['nearestDifferentMaster', 'minion', 'canRepel'],
+    AI: {
+        BLIND: true
+    },
+    BODY: {
+        FOV: 1,
+        RANGE: 50
+    },
+    SKILL: setSkill(0, 4, 9, 6, 6, 2, 9, 0, 0, 0),
+    VALUE: 1e6,
+    BROADCAST_MESSAGE: `A Pentaguardian has been slain, but it's not over yet...`,
+	ON_DEAD: function({ sockets, ran, Entity }){
+		let x = this.x,
+			y = this.y;
+		setTimeout(() => {
+			sockets.broadcast("The Guardians have arrived.");
+			for (let i = 0; i < 5; i++) {
+				let boss = new Entity({
+					x: x,
+					y: y
+				});
+				boss.team = this.team;
+				boss.define(Class.guardianAI);
+			}
+		}, 3000);
+	}
+};
