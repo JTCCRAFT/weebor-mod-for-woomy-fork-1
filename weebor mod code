@@ -49,9 +49,9 @@ defExports.basic = {
                 tier: 4
             });
 				me.upgrades.push({
-                class: "oneshotter",
+                class: "weirdSpike",
                 level: 60,
-                index: Class.oneshotter.index,
+                index: Class.weirdSpike.index,
                 tier: 4
             });
         } 
@@ -1267,4 +1267,36 @@ defExports.heliPropAA = {
     }, {
         POSITION: [666, 9, 1, 0, 0, 270, 0]
     }]
+};
+
+defExports.weirdSpike = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Weird Spike',
+    DANGER: 7,
+    BODY: {
+        FOV: 1.05,
+        DAMAGE: base.DAMAGE * 1.1,
+        SPEED: base.SPEED * 1.05,
+        DENSITY: base.DENSITY * 2
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+    STAT_NAMES: statNames.smasher,
+    TURRETS: [{
+        POSITION: [20.5, 0, 0, 0, 360, 0],
+        TYPE: defExports.weirdSpikeBody1
+    }, {
+        POSITION: [20.5, 0, 0, 180, 360, 0],
+        TYPE: defExports.weirdSpikeBody2
+    }],
+	ON_DEFINED: (me) => {
+        if (c.serverName.includes("Hangout")){
+				me.upgrades.push({
+                class: "oneshotter",
+                level: 60,
+                index: Class.oneshotter.index,
+                tier: 4
+            });
+        } 
+    }
 };
