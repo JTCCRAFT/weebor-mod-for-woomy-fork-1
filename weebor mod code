@@ -294,7 +294,7 @@ defExports.eggSanctuaryLite = {
 						} else sockets.broadcast("The EK-0 has been consoled just in time...");
 					}, 6000);
 				}
-			}, 6e5);
+			}, 6e4);
 		}, 6000);
 	}
 };
@@ -1224,4 +1224,47 @@ defExports.ultimateGuardianAI = {
     SKILL: setSkill(9, 9, 9, 9, 9, 9, 9, 9, 9, 9),
     VALUE: 8e6,
     BROADCAST_MESSAGE: 'The ULTIMA_7 has been overpowered!'
+};
+
+defExports.dougdimmadome = makeAuto({
+    PARENT: [defExports.genericTank],
+    DANGER: 7,
+    BODY: {
+        ACCELERATION: base.ACCEL * .7,
+        SPEED: base.SPEED * .7
+    },
+    LAYER: 13,
+    MOTION_TYPE: 'glideBall',
+    IS_HELICOPTER: true,
+    HAS_NO_RECOIL: true,
+    GUNS: [{
+        POSITION: [18, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.less_pen, g.no_recoil]),
+            TYPE: defExports.bullet
+        }
+    }, {
+        POSITION: [18, 4.8, 1, 0, -6.923, 195, 0]
+    }, {
+        POSITION: [18, 4.8, 1, 0, 6.923, 165, 0]
+    }],
+    TURRETS: [{
+        POSITION: [8, -19, 0, 0, 361, 1],
+        TYPE: defExports.heliPropB
+    }]
+}, 'Doug Dimmadome', {
+    type: defExports.heliPropAA,
+    independent: true
+});
+defExports.heliPropAA = {
+    CONTROLLERS: ['reverseHeliSpin'],
+    GUNS: [{
+        POSITION: [666, 9, 1, 0, 0, 0, 0]
+    }, {
+        POSITION: [666, 9, 1, 0, 0, 90, 0]
+    }, {
+        POSITION: [666, 9, 1, 0, 0, 180, 0]
+    }, {
+        POSITION: [666, 9, 1, 0, 0, 270, 0]
+    }]
 };
