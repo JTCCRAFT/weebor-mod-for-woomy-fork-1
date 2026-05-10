@@ -463,15 +463,16 @@ defExports.oneshotter = {
 };
 defExports.washeewashee = {
 	PARENT: [defExports.genericTank],
-    LABEL: "rollfac giftbox",
+	LABEL: "rollfac giftbox",
 	SIZE: 15,
 	VALUE: 15000,
-    SHAPE: 10017,
-    PROPS: [makeAura(8)],
+	SHAPE: 10017,
+	PROPS: [makeAura(8)],
 	ON_DEAD: function ({ sockets, ran, Entity }) {
 		let x = this.x,
 			y = this.y,
-			rand = Math.floor(10);
+			// Spawns a random number of squares from 0 to 10
+			rand = Math.round(Math.random() * 10);
 		for (let i = 0; i < rand; i++) {
 			let crash = new Entity({
 				x: x,
